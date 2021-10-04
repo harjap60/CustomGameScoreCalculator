@@ -1,5 +1,7 @@
 package ca.cmpt276.androidgamescoreapp;
 
+import androidx.annotation.NonNull;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -67,5 +69,14 @@ public class Game {
     //Returns the score for a player in the player_list linked list.
     public int getScorePlayer(int index){
         return player_list.get(index).getPoints();
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        return getDate().getMonth().name() + " " + getDate().getDayOfMonth() + " @ " +
+                getTime().getHour() + ":" + getTime().getMinute() +
+                " - Player " + gameWinners().get(0) + " won : " +
+                getScorePlayer(0) + " vs " + getScorePlayer(1);
     }
 }

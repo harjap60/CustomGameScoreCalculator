@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="ca.cmpt276.androidgamescoreapp">
+    package="ca.cmpt276.androidgamescoreapp" >
 
     <application
         android:allowBackup="true"
@@ -8,13 +8,16 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AndroidGameScoreApp">
+        android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".CreateGame"
-            android:exported="true" />
+            android:label= "Create New Game"
+            android:parentActivityName= ".MainActivity"
+            android:exported="true"/>
         <activity
             android:name=".MainActivity"
-            android:exported="true">
+            android:label= "All Games"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

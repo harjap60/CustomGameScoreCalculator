@@ -6,9 +6,16 @@ public class GameManager {
     private LinkedList<Game> games;
     private int numberOfGames;
 
-    public GameManager(){
-        games = new LinkedList<>();
-        numberOfGames = 0;
+    private static GameManager instance;
+    private GameManager(){}
+
+    public static GameManager getInstance() {
+        if(instance == null) {
+            instance = new GameManager();
+            instance.games = new LinkedList<>();
+            instance.numberOfGames = 0;
+        }
+        return instance;
     }
 
     //Create and add new Game and add it to the "games" linked list

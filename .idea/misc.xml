@@ -4,7 +4,16 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1296875" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/activity_create_game.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2890625" />
+        <entry key="app/src/main/res/layout/activity_test_toolbar.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/content_test_toolbar.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/game_List_View.xml" value="0.2890625" />
+        <entry key="app/src/main/res/layout/game_items.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/game_list_item.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/layout/game_list_match.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/menu_create_game.xml" value="0.3098958333333333" />
+        <entry key="app/src/main/res/menu/menu_main_activity.xml" value="0.203125" />
       </map>
     </option>
   </component>
