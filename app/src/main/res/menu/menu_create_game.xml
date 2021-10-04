@@ -3,7 +3,7 @@
 
     <!-- "Mark Favorite", should appear as action button if possible -->
     <item
-        android:id="@+id/action_favorite"
+        android:id="@+id/save_game"
         android:icon="@drawable/ic_baseline_save_24"
         android:title="SAVE"
         app:showAsAction="ifRoom"/>
