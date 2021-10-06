@@ -5,14 +5,18 @@ import androidx.annotation.NonNull;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.TextStyle;
 import java.util.LinkedList;
+import java.util.Locale;
 
 public class Game {
     private int player_count;
+
     private LinkedList<PlayerScore> player_list; // Stores list of players
+
     private LocalDate date;
     private LocalTime time;
-
     public Game(){
         LocalDateTime date_time = LocalDateTime.now();
         time = date_time.toLocalTime();
@@ -21,13 +25,19 @@ public class Game {
     }
 
     //New PlayerScore class is created and added to the player_list linked list.
+
     public void addPlayer(int cards, int sum, int wager_cards){
         PlayerScore new_player = new PlayerScore(cards, sum, wager_cards);
         player_list.add(player_count,new_player);
         ++player_count;
     }
-
     // Returns a LinkedList of the winning player(s)
+
+    public void removePlayer(int index){
+        player_list.remove(index);
+        --player_count;
+    }
+
     public LinkedList<Integer> gameWinners(){
         LinkedList<Integer> winners = new LinkedList<>();
         //0 players means no winners
@@ -53,7 +63,6 @@ public class Game {
         }
         return winners;
     }
-
     public LocalDate getDate(){
         return date;
     }
@@ -67,16 +76,27 @@ public class Game {
     }
 
     //Returns the score for a player in the player_list linked list.
+
     public int getScorePlayer(int index){
         return player_list.get(index).getPoints();
     }
-
     @NonNull
     @Override
     public String toString() {
-        return getDate().getMonth().name() + " " + getDate().getDayOfMonth() + " @ " +
-                getTime().getHour() + ":" + getTime().getMinute() +
-                " - Player " + gameWinners().get(0) + " won : " +
+        String pattern = "hh:mma";
+
+        if(getScorePlayer(0) == getScorePlayer(1)){
+            return getDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.US) + " " +
+                    getDate().getDayOfMonth() + " @ " + getTime().format(DateTimeFormatter.ofPattern(pattern))
+                    + " - Tie : " + getScorePlayer(0) + " vs " + getScorePlayer(1);
+        }
+        return getDate().getMonth().getDisplayName(TextStyle.SHORT, Locale.US)  + " " +
+                getDate().getDayOfMonth() + " @ " + getTime().format(DateTimeFormatter.ofPattern(pattern))
+                + " - Player " + gameWinners().get(0) + " won : " +
                 getScorePlayer(0) + " vs " + getScorePlayer(1);
+    }
+
+    public LinkedList<PlayerScore> getPlayer_list() {
+        return player_list;
     }
 }

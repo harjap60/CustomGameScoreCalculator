@@ -7,9 +7,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.TextView;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -17,6 +17,7 @@ public class MainActivity extends AppCompatActivity {
     private int count = 0;
     private GameManager mainManager;
     ArrayAdapter<Game> adapter;
+    ListView list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,48 +26,36 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        populateListView();
+        mainManager = GameManager.getInstance();
+        adapter = new ArrayAdapter<Game>(this, R.layout.game_items,R.id.item_textView ,mainManager.getGames());
 
-        // New Game button
-        FloatingActionButton newBtn = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
-        newBtn.setOnClickListener(new View.OnClickListener() {
+        //Configure the list
+        list = (ListView) findViewById(R.id.gamesListView);
+        list.setAdapter(adapter);
+        list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-                TextView textView = (TextView) findViewById(R.id.textView3);
-                textView.setText("" + count);
-                ++count;
-
-                Intent intent = CreateGame.makeIntent(MainActivity.this);
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent intent = CreateGame.makeIntent(MainActivity.this, i);
                 startActivity(intent);
             }
         });
 
+        // New Game button(bottom right corner)
+        FloatingActionButton newBtn = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
+        newBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = CreateGame.makeIntent(MainActivity.this, -1);
+                startActivity(intent);
+            }
+        });
     }
 
-    private void populateListView() {
-//        if(count > 0){
-//            adapter.notifyDataSetChanged();
-//        }
-//        else{
-            mainManager = GameManager.getInstance();
-            Game newGame = new Game(); newGame.addPlayer(20,30,3); newGame.addPlayer(30,50,2);
-            mainManager.addNewGame(newGame);
-            newGame = new Game(); newGame.addPlayer(10,10,5); newGame.addPlayer(100,20,2);
-            mainManager.addNewGame(newGame);
-            newGame = new Game(); newGame.addPlayer(240,50,1); newGame.addPlayer(130,90,2);
-            mainManager.addNewGame(newGame);
-            newGame = new Game(); newGame.addPlayer(220,60,3); newGame.addPlayer(130,10,4);
-            mainManager.addNewGame(newGame);
-            newGame = new Game(); newGame.addPlayer(210,70,4); newGame.addPlayer(130,50,2);
-            mainManager.addNewGame(newGame);
-
-            //Build Adapter
-            adapter = new ArrayAdapter<Game>(this, R.layout.game_items,R.id.item_textView ,mainManager.getGames());
-
-            //Configure the list
-            ListView list = (ListView) findViewById(R.id.gamesListView);
-            list.setAdapter(adapter);
-        //}
+    @Override
+    public void onResume(){
+        super.onResume();
+        list.invalidate();
+        adapter.notifyDataSetChanged();
 
     }
 
