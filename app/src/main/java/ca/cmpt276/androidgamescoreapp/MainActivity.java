@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         mainManager = GameManager.getInstance();
         adapter = new ArrayAdapter<Game>(this, R.layout.game_items,R.id.item_textView ,mainManager.getGames());
 
-        //Configure the list
+        //Configuring the list
         list = (ListView) findViewById(R.id.gamesListView);
         list.setAdapter(adapter);
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // New Game button(bottom right corner)
+        // New Game button implementation
         FloatingActionButton newBtn = (FloatingActionButton) findViewById(R.id.floatingActionButton2);
         newBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -51,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    /* +
+    Refreshes the list and notifies the adapter of changes when returning from an activity
+     */
     @Override
     public void onResume(){
         super.onResume();

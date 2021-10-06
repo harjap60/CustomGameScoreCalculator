@@ -13,4 +13,9 @@
     <string name="scores">Scores</string>
     <string name="of_wagers"># of Wagers</string>
     <string name="sum_points">Sum Points</string>
+    <string name="implemented_no_extra_features">Implemented No Extra Features</string>
+    <string name="todo">TODO</string>
+    <string name="player_1">Player 1</string>
+    <string name="player2">Player2</string>
+    <string name="of_cards"># of Cards</string>
 </resources>
